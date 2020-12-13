@@ -1,0 +1,22 @@
+<form [formGroup]="form" (submit)="submit()">
+  <div class="mb-3">
+    <label>Title</label>
+    <input formControlName="title" class="form-control" name="title">
+  </div>
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea formControlName="description" class="form-control" name="description"></textarea>
+  </div>
+  <div class="mb-3">
+    <label>Image</label>
+    <div class="input-group">
+      <input formControlName="image" class="form-control" name="image">
+      <app-upload (uploaded)="form.patchValue({'image': $event})"></app-upload>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label>Price</label>
+    <input formControlName="price" type="number" class="form-control" name="price">
+  </div>
+  <button class="btn btn-outline-secondary">Save</button>
+</form>

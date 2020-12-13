@@ -1,0 +1,38 @@
+<div class="pt-3 pb-2 mb-3 border-bottom">
+  <a routerLink="/products/create" class="btn btn-sm btn-outline-secondary">Add</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{product.id}}</td>
+      <td><img [src]="product.image" height="50"/></td>
+      <td>{{product.title}}</td>
+      <td>{{product.price}}</td>
+      <td>
+        <div class="btn-group mr-2">
+          <a [routerLink]="['/products', product.id, 'edit']" class="btn btn-sm btn-outline-secondary">Edit</a>
+          <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary"
+             (click)="delete(product.id)"
+          >Delete</a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-paginator
+  [lastPage]="lastPage"
+  (pageChanged)="load($event)"
+></app-paginator>

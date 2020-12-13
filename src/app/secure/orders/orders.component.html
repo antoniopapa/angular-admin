@@ -1,0 +1,61 @@
+<div class="pt-3 pb-2 mb-3 border-bottom">
+  <a (click)="export()" class="btn btn-sm btn-outline-secondary">Export</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let order of orders">
+      <tr>
+        <td>{{order.id}}</td>
+        <td>{{order.name}}</td>
+        <td>{{order.email}}</td>
+        <td>{{order.total}}</td>
+        <td>
+          <div class="btn-group mr-2">
+            <a class="btn btn-sm btn-outline-secondary" (click)="select(order.id)">View</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <div class="overflow-hidden" [@tableState]="itemState(order.id)">
+            <table class="table table-sm">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Product Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of order.order_items">
+                <td>{{item.id}}</td>
+                <td>{{item.product_title}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<app-paginator
+  [lastPage]="lastPage"
+  (pageChanged)="load($event)"
+></app-paginator>
